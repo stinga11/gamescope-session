@@ -11,11 +11,11 @@ case "$1" in
         pkexec /usr/lib/steamos/steam-set-session gamescope-session.desktop;;
     'gamescope')
         pkexec /usr/lib/steamos/steam-set-session gamescope-session.desktop
-        qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout;;
+        sudo systemctl restart plasmalogin.service;;
     'plasma')
         pkexec /usr/lib/steamos/steam-set-session plasma.desktop
         steam -shutdown
-        systemctl --user stop gamescope-session.target;;
+        sudo systemctl restart plasmalogin.service;;
     *)
         [[ -n "$1" ]] && echo -e "Unknown session '$1'\n"
         cat <<EOF
