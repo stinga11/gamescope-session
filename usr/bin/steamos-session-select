@@ -12,7 +12,7 @@ case "$1" in
     'gamescope')
         pkexec /usr/lib/steamos/steam-set-session gamescope-session.desktop
         CURRENT_SESSION="$XDG_SESSION_ID"
-        qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
+        qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout 2>/dev/null || qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
         while loginctl show-session "$CURRENT_SESSION" &>/dev/null; do
             sleep 0.5
         done
@@ -21,7 +21,7 @@ case "$1" in
         pkexec /usr/lib/steamos/steam-set-session plasma.desktop
         steam -shutdown
         systemctl --user stop gamescope-session.target
-        while pgrep -x "steam" &>/dev/null; do
+        while systemctl --user is-active --quiet gamescope-session.target; do
             sleep 0.5
         done
         sudo systemctl restart plasmalogin.service;;
