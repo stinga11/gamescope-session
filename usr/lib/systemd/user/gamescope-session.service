@@ -13,6 +13,7 @@ Before=xdg-desktop-portal.service
 [Service]
 TimeoutStartSec=5
 TimeoutStopSec=10
+ExecStartPre=-/usr/bin/systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY
 ExecStart=/usr/lib/steamos/gamescope-session
 ExecStopPost=/usr/bin/bash -c '/usr/bin/rm -rf "$XDG_RUNTIME_DIR"/gamescope{.,-}* /tmp/gamescope-limiter*'
 Type=notify
