@@ -3,6 +3,8 @@ Description=Set autologin to gamescope on logout
 PartOf=graphical-session.target
 After=graphical-session.target
 ConditionPathExists=!%t/gamescope-environment
+StartLimitIntervalSec=10
+StartLimitBurst=3
 
 [Service]
 Type=oneshot
