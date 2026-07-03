@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
 
+# Verificar que plasmalogin esté activo antes de hacer nada
+if ! systemctl is-active --quiet plasmalogin.service; then
+    echo "plasmalogin.service no está activo, abortando." >&2
+    exit 1
+fi
+
+# Determinar el usuario de forma robusta, sin depender de hardcoding
+USER_NAME="${PLASMALOGINUSER:-${SUDO_USER:-$(logname 2>/dev/null || whoami)}}"
+: "${USER_NAME:?No se pudo determinar el usuario}"
+
 CONF_FILE="/etc/plasmalogin.conf"
 
 # Session, gamescope or plasma
@@ -10,11 +20,11 @@ SESSION="${1:-gamescope-session.desktop}"
 if grep -q "^\[Autologin\]" "$CONF_FILE" 2>/dev/null; then
     sed -i "s/^Session=.*/Session=$SESSION/" "$CONF_FILE"
 else
-    cat >> "$CONF_FILE" <<EOF
+    cat >> "$CONF_FILE" << EOF2
 
 [Autologin]
-User=deck
+User=${USER_NAME}
 Session=$SESSION
 Relogin=true
-EOF
+EOF2
 fi
