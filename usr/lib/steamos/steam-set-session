@@ -20,11 +20,11 @@ SESSION="${1:-gamescope-session.desktop}"
 if grep -q "^\[Autologin\]" "$CONF_FILE" 2>/dev/null; then
     sed -i "s/^Session=.*/Session=$SESSION/" "$CONF_FILE"
 else
-    cat >> "$CONF_FILE" << EOF2
+    cat >> "$CONF_FILE" << EOF
 
 [Autologin]
 User=${USER_NAME}
 Session=$SESSION
 Relogin=true
-EOF2
+EOF
 fi
