@@ -12,4 +12,3 @@ Upholds=steam-launcher.service
 
 Wants=ibus-gamescope.service
 Wants=gamescope-mangoapp.service
-Wants=steamos-manager.service
