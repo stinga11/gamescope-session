@@ -11,7 +11,5 @@ BindsTo=gamescope-session.service
 Upholds=steam-launcher.service
 
 Wants=ibus-gamescope.service
-Wants=steam-notif-daemon.service
-Wants=galileo-mura-setup.service
 Wants=gamescope-mangoapp.service
 Wants=steamos-manager.service
