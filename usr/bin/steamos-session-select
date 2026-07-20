@@ -11,7 +11,7 @@ case "$1" in
         pkexec /usr/lib/steamos/steam-set-session gamescope-session.desktop;;
     'gamescope')
         pkexec /usr/lib/steamos/steam-set-session gamescope-session.desktop
-        CURRENT_SESSION="$XDG_SESSION_ID"
+        CURRENT_SESSION=$(loginctl show-session $XDG_SESSION_ID -p Id --value)
         qdbus6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout 2>/dev/null || qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout
         while loginctl show-session "$CURRENT_SESSION" &>/dev/null; do
             sleep 0.5
