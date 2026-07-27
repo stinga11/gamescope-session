@@ -8,7 +8,7 @@ PartOf=graphical-session.target
 After=xdg-desktop-portal.service
 
 [Service]
-ExecStart=/usr/bin/steam -steamos3 -steampal -steamdeck -gamepadui
+ExecStart=/usr/lib/steamos/steam-launcher
 
 # Track short sessions to trigger a repair after enough failures
 ExecStartPre=/usr/lib/steamos/steam-short-session-tracker --track-started
