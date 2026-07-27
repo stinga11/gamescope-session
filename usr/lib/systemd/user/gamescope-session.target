@@ -3,6 +3,7 @@ Description=Gamescope Session
 Requires=graphical-session.target
 BindsTo=graphical-session.target
 After=graphical-session.target
+After=gamescope-session.service
 PropagatesStopTo=graphical-session.target
 
 Requires=gamescope-session.service
